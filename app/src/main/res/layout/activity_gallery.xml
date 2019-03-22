@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		tools:context=".gallery.GalleryActivity">
+
+	<include layout="@layout/layout_toolbar"/>
+	
+	<FrameLayout android:layout_width="match_parent"
+				 android:id="@+id/container"
+				 android:layout_height="match_parent">
+	<androidx.recyclerview.widget.RecyclerView
+			android:layout_width="match_parent"
+			android:id="@+id/imagesRecyclerView"
+			android:layout_height="wrap_content"
+			android:padding="10dp">
+	</androidx.recyclerview.widget.RecyclerView>
+	
+	<View android:layout_width="match_parent"
+		  android:id="@+id/backView"
+		  android:background="@color/offwhite"
+		  android:alpha="0.8"
+		  android:visibility="invisible"
+		  android:layout_height="match_parent"/>
+	
+	<ImageView
+			android:id="@+id/expanded_image"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="invisible"
+			tools:src="@drawable/img_shadab"
+			android:contentDescription="@string/expanded_Image"/>
+	
+	</FrameLayout>
+
+</LinearLayout>
