@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import com.limra.jaipurilohar.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class StateAdapter extends ArrayAdapter<StateCityModel> {
 
@@ -40,8 +42,7 @@ public class StateAdapter extends ArrayAdapter<StateCityModel> {
     }
 
     /**
-     * Gets the state object by calling getItem and
-     * Sets the state name to the drop-down TextView.
+     * Gets the state object by calling getItem and Sets the state name to the drop-down TextView.
      *
      * @param position the position of the item selected
      * @return returns the updated View
@@ -50,7 +51,7 @@ public class StateAdapter extends ArrayAdapter<StateCityModel> {
         StateCityModel state = getItem(position);
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.row_spinner, null);
-        TextView textView =  v.findViewById(R.id.spinnerText);
+        TextView textView = v.findViewById(R.id.spinnerText);
         assert state != null;
         textView.setText(state.getStateName());
         return v;

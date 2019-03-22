@@ -2,6 +2,7 @@ package com.limra.jaipurilohar.dashboard;
 
 
 import android.view.View;
+
 import androidx.viewpager.widget.ViewPager;
 
 public class ZoomOutTransformation implements ViewPager.PageTransformer {
@@ -12,19 +13,17 @@ public class ZoomOutTransformation implements ViewPager.PageTransformer {
     @Override
     public void transformPage(View page, float position) {
 
-        if (position <-1){  // [-Infinity,-1)
+        if (position < -1) {  // [-Infinity,-1)
             // This page is way off-screen to the left.
             page.setAlpha(0);
 
-        }
-        else if (position <=1){ // [-1,1]
+        } else if (position <= 1) { // [-1,1]
 
-            page.setScaleX(Math.max(MIN_SCALE,1-Math.abs(position)));
-            page.setScaleY(Math.max(MIN_SCALE,1-Math.abs(position)));
-            page.setAlpha(Math.max(MIN_ALPHA,1-Math.abs(position)));
+            page.setScaleX(Math.max(MIN_SCALE, 1 - Math.abs(position)));
+            page.setScaleY(Math.max(MIN_SCALE, 1 - Math.abs(position)));
+            page.setAlpha(Math.max(MIN_ALPHA, 1 - Math.abs(position)));
 
-        }
-        else {  // (1,+Infinity]
+        } else {  // (1,+Infinity]
             // This page is way off-screen to the right.
             page.setAlpha(0);
 

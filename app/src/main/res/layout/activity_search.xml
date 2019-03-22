@@ -1,121 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-		tools:context=".search.SearchActivity">
-	
-	<include layout="@layout/layout_toolbar"/>
-	
-	<include layout="@layout/background_view"/>
-	
-	<LinearLayout android:layout_width="match_parent"
-				   android:padding="@dimen/activity_horizontal_margin"
-				  android:layout_gravity="center"
-				  android:orientation="vertical"
-					android:layout_height="wrap_content">
-		
-		<LinearLayout android:layout_width="match_parent"
-					   android:orientation="horizontal"
-					  android:weightSum="3"
-					  android:layout_height="wrap_content">
-		
-		<TextView android:layout_width="0dp"
-				  android:text="@string/name"
-				  android:layout_weight="0.5"
-				  android:id="@+id/nameTextView"
-				  style="@style/labelStyleMedium"
-				  android:layout_height="wrap_content"/>
-		
-		<EditText android:layout_width="0dp"
-				  android:inputType="text"
-				  android:layout_weight="2.5"
-				  android:id="@+id/nameEditText"
-				  android:labelFor="@+id/nameTextView"
-				  android:layout_marginStart="@dimen/activity_horizontal_margin"
-				  android:layout_height="wrap_content"/>
-		</LinearLayout>
-		
-		<LinearLayout android:layout_width="match_parent"
-					  android:orientation="horizontal"
-					  android:weightSum="3"
-					  android:layout_marginTop="40dp"
-					  android:layout_height="wrap_content">
-			
-			<TextView android:layout_width="0dp"
-					  android:text="@string/state"
-					  android:id="@+id/stateTextView"
-					  style="@style/labelStyleMedium"
-					  android:layout_weight="0.5"
-					  android:layout_height="wrap_content"/>
-			
-			<RelativeLayout android:layout_width="0dp"
-							android:layout_weight="2.5"
-							android:background="@drawable/spinner_background"
-							android:layout_height="wrap_content">
-			
-			<Spinner android:layout_width="match_parent"
-					 android:id="@+id/stateSpinner"
-					 android:layout_height="wrap_content"/>
-			</RelativeLayout>
-		</LinearLayout>
-		
-		<LinearLayout android:layout_width="match_parent"
-					  android:orientation="horizontal"
-					  android:weightSum="3"
-					  android:layout_marginTop="40dp"
-					  android:layout_height="wrap_content">
-		
-		<TextView android:layout_width="0dp"
-				  android:text="@string/city"
-				  android:id="@+id/cityTextView"
-				  style="@style/labelStyleMedium"
-				  android:layout_weight="0.5"
-				  android:layout_height="wrap_content"/>
-			<RelativeLayout android:layout_width="0dp"
-							android:layout_weight="2.5"
-							android:background="@drawable/spinner_background"
-							android:layout_height="wrap_content">
-				
-				<Spinner android:layout_width="match_parent"
-						 android:id="@+id/citySpinner"
-						 android:layout_height="wrap_content"/>
-			</RelativeLayout>
-			
-		</LinearLayout>
-		
-		<LinearLayout android:layout_width="match_parent"
-					  android:orientation="horizontal"
-					  android:weightSum="3"
-					  android:layout_marginTop="40dp"
-					  android:layout_height="wrap_content">
-			
-			<TextView android:layout_width="0dp"
-					  android:text="@string/gotra"
-					  android:id="@+id/subCaste"
-					  style="@style/labelStyleMedium"
-					  android:layout_weight="0.5"
-					  android:layout_height="wrap_content"/>
-			
-			<RelativeLayout android:layout_width="0dp"
-							android:layout_weight="2.5"
-							android:background="@drawable/spinner_background"
-							android:layout_height="wrap_content">
-				
-				<Spinner android:layout_width="match_parent"
-						 android:id="@+id/gotraSpinner"
-						 android:layout_height="wrap_content"/>
-			</RelativeLayout>
-		</LinearLayout>
-		
-		<Button
-				android:id="@+id/search_button"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				style="@style/button_style"
-				android:layout_margin="40dp"
-				android:text="@string/action_search"/>
-	</LinearLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context=".search.SearchActivity">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <include layout="@layout/background_view"/>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/labelStyleMedium"
+                android:id="@+id/nameTextView"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:text="@string/name"/>
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:inputType="text"
+                android:labelFor="@+id/nameTextView"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_weight="2.5"
+                android:layout_width="0dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/labelStyleMedium"
+                android:id="@+id/stateTextView"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:text="@string/state"/>
+
+            <RelativeLayout
+                android:background="@drawable/spinner_background"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_width="0dp">
+
+                <Spinner
+                    android:id="@+id/stateSpinner"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/labelStyleMedium"
+                android:id="@+id/cityTextView"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:text="@string/city"/>
+
+            <RelativeLayout
+                android:background="@drawable/spinner_background"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_width="0dp">
+
+                <Spinner
+                    android:id="@+id/citySpinner"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/labelStyleMedium"
+                android:id="@+id/subCaste"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:text="@string/gotra"/>
+
+            <RelativeLayout
+                android:background="@drawable/spinner_background"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_width="0dp">
+
+                <Spinner
+                    android:id="@+id/gotraSpinner"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            style="@style/button_style"
+            android:id="@+id/search_button"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:layout_width="match_parent"
+            android:text="@string/action_search"/>
+    </LinearLayout>
 </FrameLayout>

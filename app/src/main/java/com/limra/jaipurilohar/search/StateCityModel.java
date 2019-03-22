@@ -4,19 +4,19 @@ import java.util.List;
 
 public class StateCityModel {
 
-        private String stateName;
-        private List<String> cities;
+    private String stateName;
+    private List<String> cities;
 
-        public StateCityModel(String stateName, List<String> cities) {
-            this.stateName = stateName;
-            this.cities = cities;
-        }
+    public StateCityModel(String stateName, List<String> cities) {
+        this.stateName = stateName;
+        this.cities = cities;
+    }
 
-        public String getStateName() {
-            return stateName;
-        }
+    public String getStateName() {
+        return stateName;
+    }
 
-        public List<String> getCities() {
-            return cities;
-        }
+    public List<String> getCities() {
+        return cities;
+    }
 }

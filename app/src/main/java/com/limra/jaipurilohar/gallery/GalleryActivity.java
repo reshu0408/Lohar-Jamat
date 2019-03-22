@@ -12,55 +12,48 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+
+import com.limra.jaipurilohar.R;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.limra.jaipurilohar.R;
 
-public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter.ImageClickListener {
+public class GalleryActivity extends AppCompatActivity implements ImagesAdapter.ImageClickListener {
 
+    private static final int[] drawableArray = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e,
+            R.drawable.f, R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j, R.drawable.k, R.drawable.l, R
+            .drawable.m, R.drawable.n, R.drawable.o, R.drawable.p, R.drawable.q, R.drawable.r, R.drawable.s, R
+            .drawable.t, R.drawable.u, R.drawable.v, R.drawable.w,};
     @BindView(R.id.imagesRecyclerView)
     RecyclerView mImagesRecyclerView;
-
     @BindView(R.id.expanded_image)
     ImageView expandedImageView;
-
     @BindView(R.id.container)
     ViewGroup container;
-
     @BindView(R.id.backView)
     View backView;
-
     private int mShortAnimationDurationEffect;
     private AnimatorSet mCurrentAnimatorEffect;
-    private static  final int[] drawableArray= {
-        R.drawable.a,
-            R.drawable.b,
-            R.drawable.c,
-            R.drawable.d,
-            R.drawable.e,
-            R.drawable.f,
-            R.drawable.g,
-            R.drawable.h,
-            R.drawable.i,
-            R.drawable.j,
-            R.drawable.k,
-            R.drawable.l,
-            R.drawable.m,
-            R.drawable.n,
-            R.drawable.o,
-            R.drawable.p,
-            R.drawable.q,
-            R.drawable.r,
-            R.drawable.s,
-            R.drawable.t,
-            R.drawable.u,
-            R.drawable.v,
-            R.drawable.w,
-    };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View view, int drawable) {
+        zoomImageFromThumb(view, drawable);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +65,12 @@ public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mImagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        ImagesAdapter imagesAdapter = new ImagesAdapter(drawableArray,this);
+        mImagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        ImagesAdapter imagesAdapter = new ImagesAdapter(drawableArray, this);
         mImagesRecyclerView.setAdapter(imagesAdapter);
 
-        mShortAnimationDurationEffect = getResources().getInteger(
-                android.R.integer.config_shortAnimTime);
+        mShortAnimationDurationEffect = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
-
 
     private void zoomImageFromThumb(final View thumbView, int imageResId) {
         if (mCurrentAnimatorEffect != null) {
@@ -92,14 +83,12 @@ public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter
         final Point globalOffset = new Point();
 
         thumbView.getGlobalVisibleRect(startBounds);
-        container
-                .getGlobalVisibleRect(finalBounds, globalOffset);
+        container.getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
         float startScale;
-        if ((float) finalBounds.width() / finalBounds.height()
-                > (float) startBounds.width() / startBounds.height()) {
+        if ((float) finalBounds.width() / finalBounds.height() > (float) startBounds.width() / startBounds.height()) {
             // Extend start bounds horizontally
             startScale = (float) startBounds.height() / finalBounds.height();
             float startWidth = startScale * finalBounds.width();
@@ -123,14 +112,10 @@ public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter
 
         // scale properties (X, Y, SCALE_X, and SCALE_Y).
         AnimatorSet set = new AnimatorSet();
-        set
-                .play(ObjectAnimator.ofFloat(expandedImageView, View.X,
-                        startBounds.left, finalBounds.left))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.Y,
-                        startBounds.top, finalBounds.top))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X,
-                        startScale, 1f)).with(ObjectAnimator.ofFloat(expandedImageView,
-                View.SCALE_Y, startScale, 1f));
+        set.play(ObjectAnimator.ofFloat(expandedImageView, View.X, startBounds.left, finalBounds.left))
+           .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top, finalBounds.top))
+           .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScale, 1f))
+           .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScale, 1f));
         set.setDuration(mShortAnimationDurationEffect);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -157,17 +142,10 @@ public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter
 
                 // back to their original values.
                 AnimatorSet set = new AnimatorSet();
-                set.play(ObjectAnimator
-                        .ofFloat(expandedImageView, View.X, startBounds.left))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.Y,startBounds.top))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_X, startScaleFinal))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_Y, startScaleFinal));
+                set.play(ObjectAnimator.ofFloat(expandedImageView, View.X, startBounds.left))
+                   .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
+                   .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
+                   .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
                 set.setDuration(mShortAnimationDurationEffect);
                 set.setInterpolator(new DecelerateInterpolator());
                 set.addListener(new AnimatorListenerAdapter() {
@@ -191,23 +169,5 @@ public class GalleryActivity extends AppCompatActivity  implements ImagesAdapter
                 mCurrentAnimatorEffect = set;
             }
         });
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onClick(View view, int drawable) {
-        zoomImageFromThumb(view,drawable);
     }
 }

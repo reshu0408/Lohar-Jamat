@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:padding="10dp"
-			  android:layout_height="wrap_content">
-	
-	<RelativeLayout android:layout_width="match_parent"
-					android:id="@+id/contactDetailLayout"
-					android:layout_marginBottom="10dp"
-					android:layout_height="wrap_content">
-		
-		<de.hdodenhof.circleimageview.CircleImageView
-				android:layout_width="48dp"
-				tools:src="@drawable/img_shadab"
-				android:id="@+id/contactsImageView"
-				android:layout_marginEnd="20dp"
-				android:layout_centerVertical="true"
-				android:layout_height="48dp"/>
-		
-		<TextView android:layout_width="match_parent"
-				  style="@style/labelStyleSmall"
-				  android:layout_toEndOf="@id/contactsImageView"
-				  tools:text="Shadab Ahamad"
-				  android:id="@+id/nameTextView"
-				  android:textColor="@android:color/black"
-				  android:layout_height="wrap_content"/>
-		
-		<TextView android:layout_width="match_parent"
-				  style="@style/labelStyleSmall"
-				  tools:text="Bhadhal Ke agwan"
-				  android:layout_toEndOf="@id/contactsImageView"
-				  android:textColor="@color/colorAccent"
-				  android:layout_below="@id/nameTextView"
-				  android:id="@+id/gotraTextView"
-				  android:layout_height="wrap_content"/>
-		
-		<TextView android:layout_width="match_parent"
-				  style="@style/labelStyleSmall"
-				  tools:text="FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1"
-				  android:layout_below="@id/gotraTextView"
-				  android:textColor="@color/light_blue"
-				  android:layout_toEndOf="@id/contactsImageView"
-				  android:id="@+id/addressTextView"
-				  android:layout_height="wrap_content"/>
-		
-		<TextView android:layout_width="match_parent"
-				  style="@style/labelStyleSmall"
-				  tools:text="+91-9589740941"
-				  android:layout_toEndOf="@id/contactsImageView"
-				  android:layout_below="@id/addressTextView"
-				  android:textColor="@color/light_blue"
-				  android:id="@+id/phoneTextView"
-				  android:layout_height="wrap_content"/>
-		
-	</RelativeLayout>
-	
-	<View android:layout_width="match_parent"
-		  android:background="@color/offwhite"
-		  android:layout_height="2dp"/>
-	
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/contactDetailLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contactsImageView"
+            android:layout_centerVertical="true"
+            android:layout_height="48dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="48dp"
+            tools:src="@drawable/img_shadab"/>
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/nameTextView"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/contactsImageView"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/black"
+            tools:text="Shadab Ahamad"/>
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/gotraTextView"
+            android:layout_below="@id/nameTextView"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/contactsImageView"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorAccent"
+            tools:text="Bhadhal Ke agwan"/>
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/addressTextView"
+            android:layout_below="@id/gotraTextView"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/contactsImageView"
+            android:layout_width="match_parent"
+            android:textColor="@color/light_blue"
+            tools:text="FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1"/>
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/phoneTextView"
+            android:layout_below="@id/addressTextView"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/contactsImageView"
+            android:layout_width="match_parent"
+            android:textColor="@color/light_blue"
+            tools:text="+91-9589740941"/>
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/offwhite"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"/>
+
 </LinearLayout>

@@ -1,59 +1,59 @@
 <resources>
-	
-	<string name="navigation_drawer_open">Open navigation drawer</string>
-	<string name="navigation_drawer_close">Close navigation drawer</string>
-	<string name="nav_header_desc">Navigation header</string>
-	<string name="action_settings">Settings</string>
-	
-	
-	<string name="app_name">Jaipuri Lohar</string>
-	<string name="app_title_front">All INDIA JAIPURI</string>
-	<string name="app_title_end">LOHAR JAMAT</string>
-	<string name="title_activity_dashboard">All India Jaipuri Lohar Jamat</string>
-	<string name="title_activity_about_us">LimraSoft</string>
-	<string name="dashboard">Dashboard</string>
-	<string name="gallery">Gallery</string>
-	<string name="education">Education</string>
-	<string name="rewards">Rewards</string>
-	<string name="search">Search Members</string>
-	<string name="career_assistance">Career Assistance</string>
-	<string name="credits">Credits</string>
-	<string name="share">Share</string>
-	
-	
-	<string name="title_activity_login">Sign in</string>
-	<!-- Strings related to login -->
-	<string name="prompt_username">UserName</string>
-	<string name="prompt_email">Email</string>
-	<string name="prompt_password">Password</string>
-	<string name="action_sign_in">Sign In</string>
-	<string name="error_no_user_exist">This username does not exist</string>
-	<string name="error_invalid_username">This username should be minimum 8 letters</string>
-	<string name="error_invalid_password_length">This password should be minimum 6 letters</string>
-	<string name="error_username_required">This username cannot be empty</string>
-	<string name="about_us_name">Shadab Ahamad</string>
-	<string name="about_us_address">Rakshak Nagar Phase 1, Kharadi, Pune - 411014</string>
-	<string name="welcome_text">Assalaamu \'Alaykum</string>
-	<string name="cd_hammer_icon">Hammer Icon</string>
-	<string name="forgot_password">Forgot password?</string>
-	<string name="sign_up_info">Don\'t have an account?</string>
-	<string name="sign_up">Sign UP!!!</string>
-	<string name="get_a_new_one">Get a new One!!!</string>
-	<string name="login_success">Login Successful</string>
-	<string name="error_incorrect_password">The password is not correct</string>
-	<string name="name">Name</string>
-	<string name="city">City</string>
-	<string name="gotra">Gotra</string>
-	<string name="state">State</string>
-	<string name="loading">Loading Data.. Please wait...\"</string>
-	<string name="action_search">Search</string>
-	<string name="contacts">Contacts</string>
-	<string name="expanded_Image">Expanded Image</string>
-	<string name="image">Image</string>
-	<string name="user">User</string>
-	<string name="about_us_designation">Software Engineer @ Cisco - Pune</string>
-	<string name="about_us_name2">Reshma Salim</string>
-	<string name="about_us_designation2">Software Engineer @ Microsoft - Hyderabad</string>
-	<string name="pageritem">Pager item</string>
-	<string name="achievers">Achievers</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="app_name">Jaipuri Lohar</string>
+    <string name="app_title_front">All INDIA JAIPURI</string>
+    <string name="app_title_end">LOHAR JAMAT</string>
+    <string name="title_activity_dashboard">All India Jaipuri Lohar Jamat</string>
+    <string name="title_activity_about_us">LimraSoft</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="gallery">Gallery</string>
+    <string name="education">Education</string>
+    <string name="rewards">Rewards</string>
+    <string name="search">Search Members</string>
+    <string name="career_assistance">Career Assistance</string>
+    <string name="credits">Credits</string>
+    <string name="share">Share</string>
+
+
+    <string name="title_activity_login">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_username">UserName</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="error_no_user_exist">This username does not exist</string>
+    <string name="error_invalid_username">This username should be minimum 8 letters</string>
+    <string name="error_invalid_password_length">This password should be minimum 6 letters</string>
+    <string name="error_username_required">This username cannot be empty</string>
+    <string name="about_us_name">Shadab Ahamad</string>
+    <string name="about_us_address">Rakshak Nagar Phase 1, Kharadi, Pune - 411014</string>
+    <string name="welcome_text">Assalaamu \'Alaykum</string>
+    <string name="cd_hammer_icon">Hammer Icon</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up_info">Don\'t have an account?</string>
+    <string name="sign_up">Sign UP!!!</string>
+    <string name="get_a_new_one">Get a new One!!!</string>
+    <string name="login_success">Login Successful</string>
+    <string name="error_incorrect_password">The password is not correct</string>
+    <string name="name">Name</string>
+    <string name="city">City</string>
+    <string name="gotra">Gotra</string>
+    <string name="state">State</string>
+    <string name="loading">Loading Data.. Please wait...\"</string>
+    <string name="action_search">Search</string>
+    <string name="contacts">Contacts</string>
+    <string name="expanded_Image">Expanded Image</string>
+    <string name="image">Image</string>
+    <string name="user">User</string>
+    <string name="about_us_designation">Software Engineer @ Cisco - Pune</string>
+    <string name="about_us_name2">Reshma Salim</string>
+    <string name="about_us_designation2">Software Engineer @ Microsoft - Hyderabad</string>
+    <string name="pageritem">Pager item</string>
+    <string name="achievers">Achievers</string>
 </resources>

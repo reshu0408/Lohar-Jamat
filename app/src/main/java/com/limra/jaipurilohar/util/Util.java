@@ -2,13 +2,12 @@ package com.limra.jaipurilohar.util;
 
 
 import android.content.Context;
-import com.limra.jaipurilohar.search.SearchActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class Util {
-    public Util(){
+    public Util() {
 
     }
 

@@ -2,27 +2,31 @@ package com.limra.jaipurilohar.search;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+
 import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.contacts.ContactsActivity;
 import com.limra.jaipurilohar.util.Util;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -46,15 +50,16 @@ public class SearchActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     private String selectedGotra;
-    @OnClick(R.id.search_button)
-    public void search(View view){
-        StateCityModel state = (StateCityModel) stateSpinner.getSelectedItem();
-        String city = citySpinner.getSelectedItem().toString();
 
-        //TODO call api for filtering
-
-        startActivity(new Intent(this, ContactsActivity.class));
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -71,35 +76,34 @@ public class SearchActivity extends AppCompatActivity {
         loadGotra();
     }
 
+    @OnClick(R.id.search_button)
+    public void search(View view) {
+        StateCityModel state = (StateCityModel) stateSpinner.getSelectedItem();
+        String city = citySpinner.getSelectedItem().toString();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        //TODO call api for filtering
+
+        startActivity(new Intent(this, ContactsActivity.class));
+        finish();
     }
 
     private void loadGotra() {
         ArrayList<String> gotraList = new ArrayList<>();
         try {
-            JSONArray jsonArray = new JSONArray(Util.loadJSONFromAsset(this.getBaseContext(),"gotra.json"));
+            JSONArray jsonArray = new JSONArray(Util.loadJSONFromAsset(this.getBaseContext(), "gotra.json"));
             for (int i = 0; i < jsonArray.length(); i++) {
                 String gotra = jsonArray.getString(i);
                 gotraList.add(gotra);
             }
-            final ArrayAdapter<String> gotraAdapter = new ArrayAdapter<>(SearchActivity.this,
-                    R.layout.row_spinner, R.id.spinnerText, gotraList);
+            final ArrayAdapter<String> gotraAdapter = new ArrayAdapter<>(SearchActivity.this, R.layout.row_spinner,
+                    R.id.spinnerText, gotraList);
             gotraSpinner.setAdapter(gotraAdapter);
 
             gotraSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                     selectedGotra = gotraAdapter.getItem(position);
+                    selectedGotra = gotraAdapter.getItem(position);
                 }
 
                 @Override
@@ -125,7 +129,7 @@ public class SearchActivity extends AppCompatActivity {
 
         pDialog.dismiss();
         try {
-            JSONArray responseArray = new JSONArray( Util.loadJSONFromAsset(this.getBaseContext(), "state_city.json"));
+            JSONArray responseArray = new JSONArray(Util.loadJSONFromAsset(this.getBaseContext(), "state_city.json"));
 
             for (int i = 0; i < responseArray.length(); i++) {
                 JSONObject response = responseArray.getJSONObject(i);
@@ -137,8 +141,8 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 statesList.add(new StateCityModel(state, citiesList));
             }
-            final StateAdapter stateAdapter = new StateAdapter(SearchActivity.this,
-                    R.layout.row_spinner, R.id.spinnerText, statesList);
+            final StateAdapter stateAdapter = new StateAdapter(SearchActivity.this, R.layout.row_spinner,
+                    R.id.spinnerText, statesList);
             stateSpinner.setAdapter(stateAdapter);
 
             stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -147,8 +151,8 @@ public class SearchActivity extends AppCompatActivity {
 
                     StateCityModel cityDetails = stateAdapter.getItem(position);
                     List<String> cityList = cityDetails.getCities();
-                    ArrayAdapter citiesAdapter = new ArrayAdapter<>(SearchActivity.this,
-                            R.layout.row_spinner, R.id.spinnerText, cityList);
+                    ArrayAdapter citiesAdapter = new ArrayAdapter<>(SearchActivity.this, R.layout.row_spinner,
+                            R.id.spinnerText, cityList);
                     citySpinner.setAdapter(citiesAdapter);
                 }
 

@@ -1,0 +1,10 @@
+<component name="CopyrightManager">
+    <copyright>
+        <option name="notice"
+                value="Copyright (c) &amp;#36;today.year Microsoft Corporation. All rights reserved."/>
+        <option name="keyword" value="Copyright"/>
+        <option name="allowReplaceKeyword" value=""/>
+        <option name="myName" value="Microsoft Copyright Profile"/>
+        <option name="myLocal" value="true"/>
+    </copyright>
+</component>

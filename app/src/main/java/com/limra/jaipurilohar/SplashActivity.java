@@ -5,21 +5,20 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+
+import com.limra.jaipurilohar.login.LoginActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.limra.jaipurilohar.dashboard.DashboardActivity;
-import com.limra.jaipurilohar.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private static final int SPLASH_TIMEOUT = 3000;
     @BindView(R.id.headTextView1)
     TextView mHeadTextView1;
-
     @BindView(R.id.headTextView2)
     TextView mHeadTextView2;
-
-    private static final int SPLASH_TIMEOUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 SplashActivity.this.finish();
                 startActivity(intent);
             }

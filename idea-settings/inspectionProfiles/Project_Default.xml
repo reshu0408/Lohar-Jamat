@@ -1,0 +1,66 @@
+<component name="InspectionProjectProfileManager">
+    <profile is_locked="false" version="1.0">
+        <option name="myName" value="Project Default"/>
+        <option name="myLocal" value="false"/>
+        <inspection_tool class="AutoBoxing" enabled="true" enabled_by_default="true"
+                         level="WARNING">
+            <option name="ignoreAddedToCollection" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="AutoUnboxing" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+        <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false"
+                         enabled_by_default="false" level="WARNING">
+            <option name="loggerClassName"
+                    value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger"/>
+            <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger"/>
+        </inspection_tool>
+        <inspection_tool class="MissingDeprecatedAnnotation" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="SimplifiableEqualsExpression" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="SystemOutErr" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+        <inspection_tool class="ThrowablePrintStackTrace" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+        <inspection_tool class="UnnecessarilyQualifiedInnerClassAccess" enabled="true"
+                         enabled_by_default="true" level="WARNING">
+            <option name="ignoreReferencesNeedingImport" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="UnnecessarilyQualifiedStaticUsage" enabled="true"
+                         enabled_by_default="true" level="WARNING">
+            <option name="m_ignoreStaticFieldAccesses" value="false"/>
+            <option name="m_ignoreStaticMethodCalls" value="false"/>
+            <option name="m_ignoreStaticAccessFromStaticContext" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="UnnecessarilyQualifiedStaticallyImportedElement" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="UnnecessaryBlockStatement" enabled="true" enabled_by_default="true"
+                         level="WARNING">
+            <option name="ignoreSwitchBranches" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="UnnecessaryCallToStringValueOf" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="UnnecessaryFinalOnLocalVariableOrParameter" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true"
+                         enabled_by_default="true" level="WARNING">
+            <option name="m_ignoreJavadoc" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="UnnecessaryParentheses" enabled="true" enabled_by_default="true"
+                         level="WARNING">
+            <option name="ignoreClarifyingParentheses" value="false"/>
+            <option name="ignoreParenthesesOnConditionals" value="false"/>
+            <option name="ignoreParenthesesOnLambdaParameter" value="false"/>
+        </inspection_tool>
+        <inspection_tool class="UnnecessaryQualifierForThis" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="UnnecessarySuperConstructor" enabled="true"
+                         enabled_by_default="true" level="WARNING"/>
+        <inspection_tool class="UnnecessarySuperQualifier" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+        <inspection_tool class="UnnecessaryThis" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+        <inspection_tool class="UnnecessaryToStringCall" enabled="true" enabled_by_default="true"
+                         level="WARNING"/>
+    </profile>
+</component>

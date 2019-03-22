@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-			 android:background="@drawable/gradient"
-             tools:context=".SplashActivity">
-	
-	<TextView android:layout_width="wrap_content"
-			  android:id="@+id/headTextView1"
-			  android:text="@string/app_title_front"
-			  android:textColor="@color/black_overlay"
-			  android:layout_centerInParent="true"
-			  android:layout_above="@+id/headTextView2"
-			  android:textSize="30sp"
-			  android:layout_height="wrap_content"/>
-	<TextView android:layout_width="wrap_content"
-			  android:id="@+id/headTextView2"
-			  android:text="@string/app_title_end"
-			  android:textColor="@color/black_overlay"
-			  android:layout_centerInParent="true"
-			  android:layout_above="@+id/hammerGif"
-			  android:layout_marginBottom="30dp"
-			  android:textSize="30sp"
-			  android:layout_height="wrap_content"/>
-	
-	<pl.droidsonroids.gif.GifTextView
-			android:id="@+id/hammerGif"
-			android:layout_width="100dp"
-			android:layout_height="100dp"
-			android:layout_centerInParent="true"
-			android:background="@drawable/ic_hammer"
-	/>
+                xmlns:tools="http://schemas.android.com/tools"
+                android:background="@drawable/gradient"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                tools:context=".SplashActivity">
+
+    <TextView
+        android:id="@+id/headTextView1"
+        android:layout_above="@+id/headTextView2"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/app_title_front"
+        android:textColor="@color/black_overlay"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/headTextView2"
+        android:layout_above="@+id/hammerGif"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
+        android:text="@string/app_title_end"
+        android:textColor="@color/black_overlay"
+        android:textSize="30sp"/>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:background="@drawable/ic_hammer"
+        android:id="@+id/hammerGif"
+        android:layout_centerInParent="true"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        />
 </RelativeLayout>

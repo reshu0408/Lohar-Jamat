@@ -8,14 +8,27 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.limra.jaipurilohar.R;
 
 import java.util.Objects;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 public class AboutUsActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +44,7 @@ public class AboutUsActivity extends AppCompatActivity {
         ImageView instagram = (ImageView) findViewById(R.id.instagram);
 
 
-        FloatingActionButton fabPhone = (FloatingActionButton)findViewById(R.id.fabPhone);
+        FloatingActionButton fabPhone = (FloatingActionButton) findViewById(R.id.fabPhone);
         fabPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,18 +75,7 @@ public class AboutUsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    
-    private void OpenFacebookPage(){
+    private void OpenFacebookPage() {
 
         String facebookPageID = "shadab.ahamad.7";
         String facebookUrl = "https://www.facebook.com/" + facebookPageID;
@@ -92,7 +94,7 @@ public class AboutUsActivity extends AppCompatActivity {
         }
     }
 
-    private void openTwitterPage(){
+    private void openTwitterPage() {
 
         String userId = "shadab_08";
         Intent intent = null;
@@ -103,20 +105,19 @@ public class AboutUsActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         } catch (Exception e) {
             // no Twitter app, revert to browser
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+ userId));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + userId));
         }
         this.startActivity(intent);
     }
 
-    private void openInstagram(){
+    private void openInstagram() {
         Uri uri = Uri.parse("http://instagram.com/_u/shadab_siraz");
         Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
         likeIng.setPackage("com.instagram.android");
         try {
             startActivity(likeIng);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://instagram.com/xxx")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/xxx")));
         }
     }
 

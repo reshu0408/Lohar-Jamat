@@ -6,22 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.limra.jaipurilohar.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
     private List<ContactModel> mContactsList;
     private Context mContext;
 
-    public ContactsAdapter(ArrayList<ContactModel> contactsList, Context context){
+    public ContactsAdapter(ArrayList<ContactModel> contactsList, Context context) {
         this.mContactsList = contactsList;
         this.mContext = context;
     }
@@ -29,20 +31,18 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_row_contacts, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_contacts, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            ContactModel contactModel = mContactsList.get(position);
-            holder.phoneTextView.setText(contactModel.getPhoneNo());
-            Picasso.get().load(contactModel.getImageUrl())
-                         .into(holder.contactsImageView);
-            holder.addressTextView.setText(contactModel.getAddress());
-            holder.gotraTextView.setText(contactModel.getGotra());
-            holder.nameTextView.setText(contactModel.getName());
+        ContactModel contactModel = mContactsList.get(position);
+        holder.phoneTextView.setText(contactModel.getPhoneNo());
+        Picasso.get().load(contactModel.getImageUrl()).into(holder.contactsImageView);
+        holder.addressTextView.setText(contactModel.getAddress());
+        holder.gotraTextView.setText(contactModel.getGotra());
+        holder.nameTextView.setText(contactModel.getName());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContactsList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.contactsImageView)
         ImageView contactsImageView;
@@ -69,7 +69,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
