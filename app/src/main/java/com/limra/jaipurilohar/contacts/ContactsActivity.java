@@ -1,11 +1,14 @@
 package com.limra.jaipurilohar.contacts;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.limra.jaipurilohar.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.limra.jaipurilohar.dao.AppDataBase;
+import com.limra.jaipurilohar.dao.SearchModel;
+import com.limra.jaipurilohar.dao.User;
 
 public class ContactsActivity extends AppCompatActivity {
 
@@ -22,8 +28,8 @@ public class ContactsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    ArrayList<ContactModel> mContactsList;
-
+    private List<User> mContactsList;
+    private SearchModel mSearchModel;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -42,7 +48,7 @@ public class ContactsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mContactsList = getContactsList();
         contactsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,37 +56,32 @@ public class ContactsActivity extends AppCompatActivity {
         contactsRecyclerView.setAdapter(contactsAdapter);
     }
 
-    private ArrayList<ContactModel> getContactsList() {
-        ContactModel contactModel = new ContactModel("Shadab Ahamad", "Bhadhal Ke agwan", "+91-9589740941",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.img_shadab);
-        ContactModel contactModel1 = new ContactModel("Tony Chaudhary", "Sinodiya k Zindran", "+91-9589740941",
-                " Bangla No 786, Srinagar, Indore", R.drawable.tony);
-        ContactModel contactModel2 = new ContactModel("Abdul Rauf", "Bhadhal Ke agwan", "+91-9589740941",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.sadar);
-        ContactModel contactModel3 = new ContactModel("Mohammad Siraj", "Joye", "+91-9589740941",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.img_shadab);
-        ContactModel contactModel4 = new ContactModel("Nizam Choudhary", "Bhadhal Ke agwan", "+91-9589740941",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.img_shadab);
-        ContactModel contactModel5 = new ContactModel("Haji Salim Lahori", "Lahori", "+91-9589740941",
-                " Bangla No 786, Srinagar, Indore", R.drawable.tony);
-        ContactModel contactModel6 = new ContactModel("Tony Chaudhary", "Bhadhal Ke agwan", "+91-9589740941",
-                " Bangla No 786, Srinagar, Indore", R.drawable.tony);
-        ContactModel contactModel7 = new ContactModel("Tony Chaudhary", "Sinodiya k Zindran", "+91-9589740941",
-                " Bangla No 786, Srinagar, Indore", R.drawable.tony);
-
-        mContactsList = new ArrayList<>();
-        mContactsList.add(contactModel);
-        mContactsList.add(contactModel1);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel3);
-        mContactsList.add(contactModel4);
-        mContactsList.add(contactModel5);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel6);
-        mContactsList.add(contactModel7);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel2);
-
+    private List<User> getContactsList() {
+        AppDataBase db = AppDataBase.getAppDatabase(this);
+        Bundle data = getIntent().getExtras();
+        SearchModel searchModel = (SearchModel) data.getParcelable("search_bundle");
+        if(searchModel != null){
+            String name = searchModel.getName();
+            String gotra = searchModel.getGotra();
+            String city = searchModel.getCity();
+            if(TextUtils.isEmpty(name) && TextUtils.isEmpty(gotra)){
+                mContactsList = db.userDao().getSearchedContactsFromCity(city);
+            }else if(TextUtils.isEmpty(name) && TextUtils.isEmpty(city)){
+                mContactsList = db.userDao().getSearchedContactsFromGotra(gotra);
+            }else if(TextUtils.isEmpty(city) && TextUtils.isEmpty(gotra)){
+                mContactsList = db.userDao().getSearchedContactsFromName(name);
+            }else if(TextUtils.isEmpty(city)){
+                mContactsList = db.userDao().getSearchedContactsFromGotraName(gotra, name);
+            }else if(TextUtils.isEmpty(gotra)){
+                mContactsList = db.userDao().getSearchedContactsFromNameCity(city, name);
+            }else if(TextUtils.isEmpty(name)){
+                mContactsList = db.userDao().getSearchedContactsFromGotraCity(gotra, city);
+            } else {
+                mContactsList = db.userDao().getSearchedContacts(gotra, city, name);
+            }
+        }else{
+            mContactsList = db.userDao().getAll();
+        }
         return mContactsList;
     }
 }

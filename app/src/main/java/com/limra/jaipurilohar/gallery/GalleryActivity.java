@@ -22,12 +22,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import java.util.Objects;
+
 public class GalleryActivity extends AppCompatActivity implements ImagesAdapter.ImageClickListener {
 
     private static final int[] drawableArray = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e,
             R.drawable.f, R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j, R.drawable.k, R.drawable.l, R
             .drawable.m, R.drawable.n, R.drawable.o, R.drawable.p, R.drawable.q, R.drawable.r, R.drawable.s, R
             .drawable.t, R.drawable.u, R.drawable.v, R.drawable.w,};
+
     @BindView(R.id.imagesRecyclerView)
     RecyclerView mImagesRecyclerView;
     @BindView(R.id.expanded_image)
@@ -63,7 +66,7 @@ public class GalleryActivity extends AppCompatActivity implements ImagesAdapter.
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mImagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         ImagesAdapter imagesAdapter = new ImagesAdapter(drawableArray, this);

@@ -42,9 +42,9 @@
     <string name="login_success">Login Successful</string>
     <string name="error_incorrect_password">The password is not correct</string>
     <string name="name">Name</string>
-    <string name="city">City</string>
+    <string name="city">City*</string>
     <string name="gotra">Gotra</string>
-    <string name="state">State</string>
+    <string name="state">State*</string>
     <string name="loading">Loading Data.. Please wait...\"</string>
     <string name="action_search">Search</string>
     <string name="contacts">Contacts</string>
@@ -56,4 +56,10 @@
     <string name="about_us_designation2">Software Engineer @ Microsoft - Hyderabad</string>
     <string name="pageritem">Pager item</string>
     <string name="achievers">Achievers</string>
+    <string name="promt_first_name">First Name</string>
+    <string name="prompt_last_name">Last Name</string>
+    <string name="action_register">Register</string>
+    <string name="prompt_phone_number">Phone Number</string>
+    <string name="member">Members</string>
+    <string name="select">Select</string>
 </resources>

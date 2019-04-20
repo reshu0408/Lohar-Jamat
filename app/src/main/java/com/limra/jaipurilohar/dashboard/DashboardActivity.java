@@ -18,10 +18,13 @@ import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.aboutUs.AboutUsActivity;
 import com.limra.jaipurilohar.contacts.ContactModel;
 import com.limra.jaipurilohar.contacts.ContactsAdapter;
+import com.limra.jaipurilohar.dao.AppDataBase;
+import com.limra.jaipurilohar.dao.User;
 import com.limra.jaipurilohar.gallery.GalleryActivity;
 import com.limra.jaipurilohar.search.SearchActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     CircleIndicator indicator;
     private int currentPage = 0;
     private Timer timer;
-    private ArrayList<ContactModel> mContactsList;
+    private List<User> mContactsList;
 
     @Override
     public void onBackPressed() {
@@ -168,37 +171,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     }
 
-    private ArrayList<ContactModel> getContactsList() {
-        ContactModel contactModel = new ContactModel("Andrew Symonds", "99% in Higher Secondary", "Award : $500",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.avtar1);
-        ContactModel contactModel1 = new ContactModel("Mahendra Singh Dhoni", "Gold Medal in B.Tech", "Award : $500",
-                " Bangla No 786, Srinagar, Indore", R.drawable.avtar2);
-        ContactModel contactModel2 = new ContactModel("Abdul Rauf", "Gold Medal in MBBS", "Award : $500",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.avtar3);
-        ContactModel contactModel3 = new ContactModel("Mohammad Siraj", "Gold Medal in MBBS", "Award : $500",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.avtar4);
-        ContactModel contactModel4 = new ContactModel("Nizam Choudhary", "Olympiad Winner", "Award : $500",
-                "FLat No 15, 16, Building No. 19, Rakshak Nagar Phase 1, Pune", R.drawable.avtar5);
-        ContactModel contactModel5 = new ContactModel("Haji Salim Lahori", "US H1B Holder", "Award : $500",
-                " Bangla No 786, Srinagar, Indore", R.drawable.avtar6);
-        ContactModel contactModel6 = new ContactModel("Chris Gayle", "10th Topper", "Award : $500",
-                " Bangla No 786, Srinagar, Indore", R.drawable.avtar6);
-        ContactModel contactModel7 = new ContactModel("Sehwag", "8th Topper", "Award : $500",
-                " Bangla No 786, Srinagar, Indore", R.drawable.avtar1);
-
-        mContactsList = new ArrayList<>();
-        mContactsList.add(contactModel);
-        mContactsList.add(contactModel1);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel3);
-        mContactsList.add(contactModel4);
-        mContactsList.add(contactModel5);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel6);
-        mContactsList.add(contactModel7);
-        mContactsList.add(contactModel2);
-        mContactsList.add(contactModel2);
-
+    private List<User> getContactsList() {
+        mContactsList = AppDataBase.getAppDatabase(this).userDao().getAll();
         return mContactsList;
     }
 

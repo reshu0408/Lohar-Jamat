@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
+import com.limra.jaipurilohar.register.RegistrationActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -134,6 +135,13 @@ public class LoginActivity extends AppCompatActivity {
     private void showDashBoard() {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.sign_up_text)
+    public void goToRegister(View view){
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     class UserLoginTask extends AsyncTask<Void, Void, Map<Integer, Boolean>> {

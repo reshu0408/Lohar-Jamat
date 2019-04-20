@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@drawable/gradient"
+        android:id="@+id/login_form"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        tools:context=".login.LoginActivity">
+
+    <LinearLayout
+            android:gravity="center"
+            android:id="@+id/register_form"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+        <TextView
+                android:id="@+id/welcome_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/welcome_text"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="25sp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:contentDescription="@string/cd_hammer_icon"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:padding="5dp"
+                android:src="@drawable/hammer"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/promt_first_name"
+                    android:id="@+id/firstName"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/prompt_last_name"
+                    android:id="@+id/last_name"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/prompt_phone_number"
+                    android:id="@+id/phone_number"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="phone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+            <TextView
+                    style="@style/labelStyleMedium"
+                    android:id="@+id/subCaste"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:text="@string/gotra"/>
+
+            <RelativeLayout
+                    android:background="@drawable/spinner_background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp">
+
+                <Spinner
+                        android:id="@+id/gotraSpinner"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <FrameLayout
+                android:background="@drawable/login_input_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent">
+
+            <Button
+                    android:background="@android:color/transparent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:id="@+id/register_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/action_register"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:visibility="visible"/>
+
+            <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:id="@+id/register_progress"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="30dp"
+                    android:visibility="gone"/>
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>

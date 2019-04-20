@@ -12,6 +12,7 @@ import android.widget.Spinner;
 
 import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.contacts.ContactsActivity;
+import com.limra.jaipurilohar.dao.SearchModel;
 import com.limra.jaipurilohar.util.Util;
 
 import org.json.JSONArray;
@@ -49,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private ProgressDialog pDialog;
-    private String selectedGotra;
+    private String mSelectedGotra,mSelectedCity, mName;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,32 +79,31 @@ public class SearchActivity extends AppCompatActivity {
 
     @OnClick(R.id.search_button)
     public void search(View view) {
-        StateCityModel state = (StateCityModel) stateSpinner.getSelectedItem();
-        String city = citySpinner.getSelectedItem().toString();
-
-        //TODO call api for filtering
-
-        startActivity(new Intent(this, ContactsActivity.class));
-        finish();
+        mSelectedCity = citySpinner.getSelectedItem().toString();
+        //0 for Select text shown in spinner
+        if(gotraSpinner.getSelectedItemPosition() == 0){
+            mSelectedGotra = "";
+        }else{
+            mSelectedGotra = gotraSpinner.getSelectedItem().toString();
+        }
+        mName = nameEditText.getText().toString();
+        SearchModel searchModel = new SearchModel(mName,mSelectedGotra,mSelectedCity);
+        Intent intent = new Intent(this, ContactsActivity.class);
+        intent.putExtra("search_bundle", searchModel);
+        startActivity(intent);
     }
 
     private void loadGotra() {
-        ArrayList<String> gotraList = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(Util.loadJSONFromAsset(this.getBaseContext(), "gotra.json"));
-            for (int i = 0; i < jsonArray.length(); i++) {
-                String gotra = jsonArray.getString(i);
-                gotraList.add(gotra);
-            }
+        List<String> gotraList = Util.getGotraList(this);
+            gotraList.add(0, getResources().getString(R.string.select));
             final ArrayAdapter<String> gotraAdapter = new ArrayAdapter<>(SearchActivity.this, R.layout.row_spinner,
                     R.id.spinnerText, gotraList);
             gotraSpinner.setAdapter(gotraAdapter);
-
             gotraSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    selectedGotra = gotraAdapter.getItem(position);
+                    mSelectedGotra = gotraAdapter.getItem(position);
                 }
 
                 @Override
@@ -111,9 +111,6 @@ public class SearchActivity extends AppCompatActivity {
 
                 }
             });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     private void displayLoader() {
