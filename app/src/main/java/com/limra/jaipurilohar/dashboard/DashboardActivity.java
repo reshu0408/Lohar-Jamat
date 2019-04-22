@@ -2,10 +2,12 @@ package com.limra.jaipurilohar.dashboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.limra.jaipurilohar.LoharApplication;
 import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.aboutUs.AboutUsActivity;
 import com.limra.jaipurilohar.contacts.ContactModel;
@@ -21,6 +25,7 @@ import com.limra.jaipurilohar.contacts.ContactsAdapter;
 import com.limra.jaipurilohar.dao.AppDataBase;
 import com.limra.jaipurilohar.dao.User;
 import com.limra.jaipurilohar.gallery.GalleryActivity;
+import com.limra.jaipurilohar.login.LoginActivity;
 import com.limra.jaipurilohar.search.SearchActivity;
 
 import java.util.ArrayList;
@@ -39,7 +44,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.limra.jaipurilohar.userDetail.UserDetailActivity;
 import me.relex.circleindicator.CircleIndicator;
+
+import static com.limra.jaipurilohar.util.Constants.MY_PREFS_NAME;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -84,6 +92,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_user) {
+
+            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            String name = prefs.getString("username", "");//"No name defined" is the default value.
+            if(!TextUtils.isEmpty(name)){
+                AppDataBase db = AppDataBase.getAppDatabase(this);
+                User currentUser = db.userDao().getUserByUserName(name);
+                if(currentUser != null){
+                    Intent intent = new Intent(this, UserDetailActivity.class);
+                    intent.putExtra("user", currentUser);
+                    startActivity(intent);
+                }
+            }
             return true;
         }
 
@@ -99,6 +119,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_gallery:
                 Intent galleryIntent = new Intent(this, GalleryActivity.class);
                 startActivity(galleryIntent);
+                break;
+            case R.id.nav_education:
+                Snackbar.make(mViewPager,getResources().getString(R.string.coming_soon), Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_rewards:
+                Snackbar.make(mViewPager,getResources().getString(R.string.coming_soon), Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_career:
+                Snackbar.make(mViewPager,getResources().getString(R.string.coming_soon), Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_share:
+                Snackbar.make(mViewPager,getResources().getString(R.string.coming_soon), Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.nav_credits:
                 Intent aboutUsIntent = new Intent(this, AboutUsActivity.class);

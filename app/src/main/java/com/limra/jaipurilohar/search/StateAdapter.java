@@ -19,7 +19,7 @@ public class StateAdapter extends ArrayAdapter<StateCityModel> {
 
     private List<StateCityModel> stateList = new ArrayList<>();
 
-    StateAdapter(@NonNull Context context, int resource, int spinnerText, @NonNull List<StateCityModel> stateList) {
+    public StateAdapter(@NonNull Context context, int resource, int spinnerText, @NonNull List<StateCityModel> stateList) {
         super(context, resource, spinnerText, stateList);
         this.stateList = stateList;
     }

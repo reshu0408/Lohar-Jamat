@@ -17,6 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_height="48dp"
             android:layout_marginEnd="20dp"
+            android:transitionName="profile"
             android:layout_width="48dp"
             tools:src="@drawable/img_shadab"/>
 

@@ -22,6 +22,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE uid = :userId")
     User getUserById(int userId);
 
+    @Query("SELECT * FROM user WHERE user_name LIKE :userName")
+    User getUserByUserName(String userName);
+
     @Update
     void updateUser (User user);
 

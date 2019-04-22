@@ -1,6 +1,7 @@
 package com.limra.jaipurilohar.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,10 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.limra.jaipurilohar.LoharApplication;
 import com.limra.jaipurilohar.R;
+import com.limra.jaipurilohar.dao.AppDataBase;
+import com.limra.jaipurilohar.dao.User;
 import com.limra.jaipurilohar.dashboard.DashboardActivity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +30,10 @@ import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import com.limra.jaipurilohar.register.RegistrationActivity;
 
+import static com.limra.jaipurilohar.util.Constants.MY_PREFS_NAME;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String[] DUMMY_CREDENTIALS = new String[]{"ahamad_shadab:Ahad@123", "salim_reshma:Ahad@123"};
     @BindView(R.id.userName)
     EditText userNameView;
     @BindView(R.id.password)
@@ -42,7 +48,10 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUpTextView;
     @BindView(R.id.sign_in_button)
     TextView signInButton;
+
     private UserLoginTask mAuthTask = null;
+    private String userName;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String userName = userNameView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        userName = userNameView.getText().toString();
+        password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -116,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isUserNameValid(String userName) {
-        return userName.length() > 8;
+        return userName.length() > 5;
     }
 
     private boolean isPasswordLengthValid(String password) {
@@ -133,6 +142,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showDashBoard() {
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("username", userName);
+        editor.apply();
+
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
@@ -160,30 +173,27 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Map<Integer, Boolean> doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-
-                return resultMap;
-            }
-
-            int i = 0;
-            for (; i < DUMMY_CREDENTIALS.length; i++) {
-                String credential = DUMMY_CREDENTIALS[i];
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUserName)) {
-                    // Account exists, return true if the password matches.
-                    resultMap.put(0, true);
-                    resultMap.put(1, pieces[1].equals(mPassword));
-                    break;
+            AppDataBase db = AppDataBase.getAppDatabase(LoginActivity.this);
+            List<User> mContactsList = db.userDao().getAll();
+            if(mContactsList != null && mContactsList.size()>0){
+                int i = 0;
+                for (; i < mContactsList.size(); i++) {
+                    String username = mContactsList.get(i).getUserName();
+                    String password = mContactsList.get(i).getPassword();
+                    if (username.equals(mUserName)) {
+                        // Account exists, return true if the password matches.
+                        resultMap.put(0, true);
+                        resultMap.put(1, password.equals(mPassword));
+                        break;
+                    }
+                }
+                if (i == mContactsList.size()) {
+                    //user dows not exist
+                    resultMap.put(0, false);
                 }
             }
-            if (i == DUMMY_CREDENTIALS.length) {
-                //user dows not exist
-                resultMap.put(0, false);
-            }
+
+
             return resultMap;
         }
 

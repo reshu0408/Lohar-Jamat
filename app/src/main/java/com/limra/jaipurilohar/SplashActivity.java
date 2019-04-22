@@ -1,10 +1,12 @@
 package com.limra.jaipurilohar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,8 @@ import butterknife.ButterKnife;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.limra.jaipurilohar.util.Constants.MY_PREFS_NAME;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -69,30 +73,28 @@ public class SplashActivity extends AppCompatActivity {
         protected Object doInBackground(Object[] params) {
             List<User> userList = new ArrayList<>();
 
-            User usman = new User(1,"Usman","Ghani", "8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
+            User usman = new User("Usman","Ghani", "usman123","usman@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
                     R.drawable.usman);
-            User tony = new User(2,"Tony","Chaudhary", "8742020289", "Sinodiya ke Zindran", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
+            User tony = new User("Tony","Chaudhary", "tony123","tony@123","8742020289", "Sinodiya ke Zindran", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
                     ,R.drawable.tony);
-            User shadab = new User(3,"Shadab","Ahamad", "9589740941", "Badhal ke Agwan", "Flat no. 15, 16, Building 19 , Rakshak Nagar Phase 1", "Pune", "Maharashtra","Software Engineer",
+            User shadab = new User("Shadab","Ahamad","shadab123","shadab@123", "9589740941", "Badhal ke Agwan", "Flat no. 15, 16, Building 19 , Rakshak Nagar Phase 1", "Pune", "Maharashtra","Software Engineer",
                     R.drawable.shadab);
-            User nizamuddin = new User(4,"Mohammad","Nizamuddin Lahori", "9827266258", "Kuchaman ke Lahori", "Champa Bagh", "Indore", "Madhya Pradesh","Business" ,R.drawable.nizamuddin);
-            User nizam = new User(5,"Nizam","Chaudhary", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business" , R.drawable.nizam);
-            User rauf = new User(6,"Mohammad","Rauf Thekedar", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
+            User nizamuddin = new User("Mohammad","Nizamuddin Lahori", "nizamuddin@123", "nizamuddin@123","9827266258", "Kuchaman ke Lahori", "Champa Bagh", "Indore", "Madhya Pradesh","Business" ,R.drawable.nizamuddin);
+            User nizam = new User("Nizam","Chaudhary", "nizam123", "nizam@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business" , R.drawable.nizam);
+            User rauf = new User("Mohammad","Rauf Thekedar","rauf123","rauf@123", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
                     ,R.drawable.rauf);
-            User fayyaz = new User(7,"Fayyaz","Ahamad", "9001956350", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Lathe Machine Specialist" , R.drawable.fayyaz);
-            User naim = new User(8,"Mohammad","Naim", "7300109689", "Badhal ke Agwan", "Luharo Ka Mohalla", "Vikaramgarh Alot", "Madhya Pradesh","Software Engineer" ,R.drawable.naim);
-            User wasim = new User(9,"Abdul","Wasim", "8989010685", "Farkya ke Mughal", "4, Government Colony Road, BirlaGram", "Nagda", "Madhya Pradesh","Teacher",R.drawable.wasim );
-            User sadar = new User(10,"Sadar","Sahab", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business",
-                    R.drawable.sadar);
-            User saddam = new User(11,"Saddam","Jindran", "8742020289", "Joye", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business",
+            User fayyaz = new User("Fayyaz","Ahamad", "fayyaz123", "fayyaz@123", "9001956350", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Lathe Machine Specialist" , R.drawable.fayyaz);
+            User naim = new User("Mohammad","Naim", "naim123", "naim@123", "7300109689", "Badhal ke Agwan", "Luharo Ka Mohalla", "Vikaramgarh Alot", "Madhya Pradesh","Software Engineer" ,R.drawable.naim);
+            User wasim = new User("Abdul","Wasim", "wasim123","wasim@123","8989010685", "Farkya ke Mughal", "4, Government Colony Road, BirlaGram", "Nagda", "Madhya Pradesh","Teacher",R.drawable.wasim );
+            User zakir = new User("Mohammad","Zakir", "zakir123", "zakir@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business" ,R.drawable.zakir);
+            User saddam = new User("Saddam","Jindran","saddam123","saddam@123", "8742020289", "Joye", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business",
                     R.drawable.saddam);
-            User aslam = new User(12,"Aslam","Chohan", "8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Furniture Business",R.drawable.aslam );
-            User siraz = new User(13,"Mohammad","Siraz", "9414570377", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
+            User aslam = new User("Aslam","Chohan","aslam123","aslam@123", "8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Furniture Business",R.drawable.aslam );
+            User siraz = new User("Mohammad","Siraz","siraz123","siraz@123", "9414570377", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
                     R.drawable.siraz);
-            User akram = new User(14,"Akram","Chohan", "8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Printing Business",R.drawable.akram );
-            User aabid = new User(15,"Aabid","Ahamad", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh"," Student",R.drawable.aabid );
-            User zakir = new User(16,"Mohammad","Zakir", "8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business" ,R.drawable.zakir);
-            User azaz = new User(17,"Azaz","Ahamad", "9001689786", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",R.drawable.azaz );
+            User akram = new User("Akram","Chohan", "akram123","akram@123","8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Printing Business",R.drawable.akram );
+            User aabid = new User("Aabid","Ahamad", "aabid123","aabid@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh"," Student",R.drawable.aabid );
+            User azaz = new User("Azaz","Ahamad", "azaz123","azaz@123","9001689786", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",R.drawable.azaz );
 
             userList.add(shadab);
             userList.add(tony);
@@ -107,7 +109,6 @@ public class SplashActivity extends AppCompatActivity {
             userList.add(saddam);
             userList.add(azaz);
             userList.add(fayyaz);
-            userList.add(sadar);
             userList.add(zakir);
             userList.add(aabid);
             userList.add(nizamuddin);
@@ -121,9 +122,17 @@ public class SplashActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-                    SplashActivity.this.finish();
-                    startActivity(intent);
+                    SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                    String name = prefs.getString("username", "");//"No name defined" is the default value.
+                    if(TextUtils.isEmpty(name)){
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        SplashActivity.this.finish();
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                        SplashActivity.this.finish();
+                        startActivity(intent);
+                    }
                 }
             }, SPLASH_TIMEOUT);
         }

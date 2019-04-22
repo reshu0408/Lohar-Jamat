@@ -1,6 +1,8 @@
 package com.limra.jaipurilohar.contacts;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.dao.User;
+import com.limra.jaipurilohar.userDetail.UserDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,14 +50,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             @Override
             public Bitmap transform(Bitmap source) {
-//                int targetWidth = holder.contactsImageView.getWidth();
-//
-//                double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
-//                int targetHeight = (int) (targetWidth * aspectRatio);
-//                if (targetHeight == 0) {
-//                    targetHeight = 100;
-//                }
-//                if (targetWidth == 0) targetWidth = 100;
                 Bitmap result = Bitmap.createScaledBitmap(source, 50, 50, false);
                 if (result != source) {
                     // Same bitmap is returned if sizes are the same
@@ -68,13 +65,25 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         };
         User user = mContactsList.get(position);
         holder.phoneTextView.setText(user.getPhoneNumber());
-        Picasso.get().load(user.getImageUrl()).transform(transformation).into(holder.contactsImageView);
+        if(user.getImageUrl() != 0)
+            Picasso.get().load(user.getImageUrl()).transform(transformation).into(holder.contactsImageView);
+        else
+            Picasso.get().load(R.drawable.hammer).transform(transformation).into(holder.contactsImageView);
+
         holder.addressTextView.setText(user.getAddress() + ", " + user.getCity()+ ", "+ user.getState());
         holder.gotraTextView.setText(user.getGotra());
         holder.nameTextView.setText(user.getFirstName() + " " + user.getLastName());
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, UserDetailActivity.class);
+                intent.putExtra("user", user);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) mContext, (View)holder.contactsImageView,  ViewCompat.getTransitionName(holder.contactsImageView));
+                mContext.startActivity(intent,options.toBundle());
+            }
+        });
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -97,6 +106,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         @BindView(R.id.phoneTextView)
         TextView phoneTextView;
+
+        @BindView(R.id.contactDetailLayout)
+        ViewGroup container;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

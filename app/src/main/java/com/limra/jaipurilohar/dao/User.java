@@ -1,15 +1,17 @@
 package com.limra.jaipurilohar.dao;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
-public class User {
+public class User implements Parcelable {
 
         @NonNull
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         private int uid;
 
         @ColumnInfo(name = "first_name")
@@ -17,6 +19,12 @@ public class User {
 
         @ColumnInfo(name = "last_name")
         private String lastName;
+
+        @ColumnInfo(name = "user_name")
+        private String userName;
+
+        @ColumnInfo(name = "password")
+        private String password;
 
         @ColumnInfo(name = "phone_number")
         private String phoneNumber;
@@ -39,8 +47,7 @@ public class User {
         @ColumnInfo(name = "image_url")
         private int imageUrl;
 
-    public User(@NonNull int uid, String firstName, String lastName, String phoneNumber, String gotra, String address, String city, String state, String occupation, int imageUrl) {
-        this.uid = uid;
+    public User(String firstName, String lastName,String userName,String password, String phoneNumber, String gotra, String address, String city, String state, String occupation, int imageUrl) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -50,7 +57,36 @@ public class User {
         this.state = state;
         this.occupation = occupation;
         this.imageUrl = imageUrl;
+        this.userName = userName;
+        this.password = password;
     }
+
+    protected User(Parcel in) {
+        uid = in.readInt();
+        firstName = in.readString();
+        lastName = in.readString();
+        phoneNumber = in.readString();
+        gotra = in.readString();
+        address = in.readString();
+        city = in.readString();
+        state = in.readString();
+        occupation = in.readString();
+        imageUrl = in.readInt();
+        userName = in.readString();
+        password = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public int getUid() {
             return uid;
@@ -127,4 +163,45 @@ public class User {
         public int getImageUrl() {
             return imageUrl;
         }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setImageUrl(int imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(uid);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(phoneNumber);
+        dest.writeString(gotra);
+        dest.writeString(address);
+        dest.writeString(city);
+        dest.writeString(state);
+        dest.writeString(occupation);
+        dest.writeInt(imageUrl);
+        dest.writeString(userName);
+        dest.writeString(password);
+    }
 }

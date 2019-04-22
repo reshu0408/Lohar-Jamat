@@ -22,7 +22,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/welcome_text"
+                android:text="@string/assalam_alaikum"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="25sp"/>
@@ -85,6 +85,112 @@
                 android:textColorHint="@color/white">
 
             <EditText
+                    android:hint="@string/username"
+                    android:id="@+id/userName"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/address"
+                    android:id="@+id/addressTextView"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+            <TextView
+                    android:id="@+id/stateTextView"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:text="@string/state"/>
+
+            <RelativeLayout
+                    android:background="@drawable/spinner_background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp">
+
+                <Spinner
+                        android:id="@+id/stateSpinner"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+            <TextView
+                    android:textSize="16sp"
+                    android:id="@+id/cityTextView"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/white"
+                    android:layout_width="0dp"
+                    android:text="@string/city"/>
+
+            <RelativeLayout
+                    android:background="@drawable/spinner_background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp">
+
+                <Spinner
+                        android:id="@+id/citySpinner"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
                     android:hint="@string/prompt_phone_number"
                     android:id="@+id/phone_number"
                     android:imeActionId="6"
@@ -109,8 +215,8 @@
                 android:weightSum="3">
 
             <TextView
-                    style="@style/labelStyleMedium"
                     android:id="@+id/subCaste"
+                    android:textSize="16sp"
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -129,6 +235,52 @@
                         android:layout_width="match_parent"/>
             </RelativeLayout>
         </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/occupation"
+                    android:id="@+id/occupation"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white">
+
+            <EditText
+                    android:hint="@string/password"
+                    android:id="@+id/password"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white"
+                    tools:ignore="Autofill"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
                 android:background="@drawable/login_input_background"
@@ -162,6 +314,5 @@
                     android:layout_width="30dp"
                     android:visibility="gone"/>
         </FrameLayout>
-
     </LinearLayout>
 </ScrollView>
