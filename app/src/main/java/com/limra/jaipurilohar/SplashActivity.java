@@ -74,43 +74,44 @@ public class SplashActivity extends AppCompatActivity {
             List<User> userList = new ArrayList<>();
 
             User usman = new User("Usman","Ghani", "usman123","usman@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
-                    R.drawable.usman);
+                   "usman");
             User tony = new User("Tony","Chaudhary", "tony123","tony@123","8742020289", "Sinodiya ke Zindran", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
-                    ,R.drawable.tony);
+                    ,"tony");
             User shadab = new User("Shadab","Ahamad","shadab123","shadab@123", "9589740941", "Badhal ke Agwan", "Flat no. 15, 16, Building 19 , Rakshak Nagar Phase 1", "Pune", "Maharashtra","Software Engineer",
-                    R.drawable.shadab);
-            User nizamuddin = new User("Mohammad","Nizamuddin Lahori", "nizamuddin@123", "nizamuddin@123","9827266258", "Kuchaman ke Lahori", "Champa Bagh", "Indore", "Madhya Pradesh","Business" ,R.drawable.nizamuddin);
-            User nizam = new User("Nizam","Chaudhary", "nizam123", "nizam@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business" , R.drawable.nizam);
+                    "shadab");
+            User nizamuddin = new User("Mohammad","Nizamuddin Lahori", "nizamuddin@123", "nizamuddin@123","9827266258", "Kuchaman ke Lahori", "Champa Bagh", "Indore", "Madhya Pradesh","Business" ,
+                    "nizamuddin");
+            User nizam = new User("Nizam","Chaudhary", "nizam123", "nizam@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business" , "nizam");
             User rauf = new User("Mohammad","Rauf Thekedar","rauf123","rauf@123", "8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business"
-                    ,R.drawable.rauf);
-            User fayyaz = new User("Fayyaz","Ahamad", "fayyaz123", "fayyaz@123", "9001956350", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Lathe Machine Specialist" , R.drawable.fayyaz);
-            User naim = new User("Mohammad","Naim", "naim123", "naim@123", "7300109689", "Badhal ke Agwan", "Luharo Ka Mohalla", "Vikaramgarh Alot", "Madhya Pradesh","Software Engineer" ,R.drawable.naim);
-            User wasim = new User("Abdul","Wasim", "wasim123","wasim@123","8989010685", "Farkya ke Mughal", "4, Government Colony Road, BirlaGram", "Nagda", "Madhya Pradesh","Teacher",R.drawable.wasim );
-            User zakir = new User("Mohammad","Zakir", "zakir123", "zakir@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business" ,R.drawable.zakir);
+                    ,"rauf");
+            User fayyaz = new User("Fayyaz","Ahamad", "fayyaz123", "fayyaz@123", "9001956350", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Lathe Machine Specialist" , "fayyaz");
+            User naim = new User("Mohammad","Naim", "naim123", "naim@123", "7300109689", "Badhal ke Agwan", "Luharo Ka Mohalla", "Vikaramgarh Alot", "Madhya Pradesh","Software Engineer" ,"naim");
+            User wasim = new User("Abdul","Wasim", "wasim123","wasim@123","8989010685", "Farkya ke Mughal", "4, Government Colony Road, BirlaGram", "Nagda", "Madhya Pradesh","Teacher","wasim" );
+            User zakir = new User("Mohammad","Zakir", "zakir123", "zakir@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business" ,"zakir");
             User saddam = new User("Saddam","Jindran","saddam123","saddam@123", "8742020289", "Joye", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh","Business",
-                    R.drawable.saddam);
-            User aslam = new User("Aslam","Chohan","aslam123","aslam@123", "8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Furniture Business",R.drawable.aslam );
+                    "saddam");
+            User aslam = new User("Aslam","Chohan","aslam123","aslam@123", "8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Furniture Business","aslam" );
             User siraz = new User("Mohammad","Siraz","siraz123","siraz@123", "9414570377", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
-                    R.drawable.siraz);
-            User akram = new User("Akram","Chohan", "akram123","akram@123","8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Printing Business",R.drawable.akram );
-            User aabid = new User("Aabid","Ahamad", "aabid123","aabid@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh"," Student",R.drawable.aabid );
-            User azaz = new User("Azaz","Ahamad", "azaz123","azaz@123","9001689786", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",R.drawable.azaz );
+                    "siraz");
+            User akram = new User("Akram","Chohan", "akram123","akram@123","8742020289", "Chaksu ke Chohan", "Jalupura", "Jaipur", "Rajasthan","Printing Business","akram" );
+            User aabid = new User("Aabid","Ahamad", "aabid123","aabid@123","8742020289", "Badhal ke Agwan", "Flat 403, Kirti Palace, Sree Nagar", "Indore", "Madhya Pradesh"," Student","aabid" );
+            User azaz = new User("Azaz","Ahamad", "azaz123","azaz@123","9001689786", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business","azaz" );
 
             userList.add(shadab);
-            userList.add(tony);
-            userList.add(usman);
+            userList.add(aabid);
+            userList.add(wasim);
+            userList.add(naim);
+            userList.add(fayyaz);
             userList.add(nizam);
+            userList.add(tony);
             userList.add(rauf);
             userList.add(siraz);
-            userList.add(wasim);
             userList.add(akram);
             userList.add(aslam);
-            userList.add(naim);
+            userList.add(usman);
             userList.add(saddam);
             userList.add(azaz);
-            userList.add(fayyaz);
             userList.add(zakir);
-            userList.add(aabid);
             userList.add(nizamuddin);
             addUserList(userList);
             return null;

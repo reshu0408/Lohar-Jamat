@@ -2,6 +2,7 @@ package com.limra.jaipurilohar.util;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +14,50 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Util {
+
     public Util() {
 
+    }
+    private static HashMap imageMap;
+
+    private static void loadMap(){
+        imageMap = new HashMap<>();
+        imageMap.put("shadab",R.drawable.shadab);
+        imageMap.put("tony", R.drawable.tony);
+        imageMap.put("usman",R.drawable.usman);
+        imageMap.put("nizam", R.drawable.nizam);
+        imageMap.put("rauf",R.drawable.rauf);
+        imageMap.put("siraz", R.drawable.siraz);
+        imageMap.put("wasim",R.drawable.wasim);
+        imageMap.put("akram",R.drawable.akram);
+        imageMap.put("aslam",R.drawable.aslam);
+        imageMap.put("naim",R.drawable.naim);
+        imageMap.put("saddam",R.drawable.saddam);
+        imageMap.put("azaz",R.drawable.azaz);
+        imageMap.put("fayyaz",R.drawable.fayyaz);
+        imageMap.put("zakir",R.drawable.zakir);
+        imageMap.put("aabid",R.drawable.aabid);
+        imageMap.put("nizamuddin",R.drawable.nizamuddin);
+    }
+
+    public static Integer getImageUrl(String imageUrl){
+        loadMap();
+        Integer drawable = null;
+        if(!TextUtils.isEmpty(imageUrl))
+            drawable =  (Integer) imageMap.get(imageUrl);
+         else
+            drawable = R.drawable.avtar;
+        unloadMap();
+        return drawable;
+    }
+
+    private static void unloadMap() {
+        imageMap = null;
     }
 
     public static String loadJSONFromAsset(Context context, String fileName) {

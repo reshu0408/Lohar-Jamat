@@ -41,6 +41,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'me.relex:circleindicator:2.1.0'
     testImplementation 'junit:junit:4.12'
+    implementation group: 'net.time4j', name: 'time4j-android', version: '4.3-2019a'
     implementation "androidx.room:room-runtime:2.1.0-alpha06"
     annotationProcessor "androidx.room:room-compiler:2.1.0-alpha06"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

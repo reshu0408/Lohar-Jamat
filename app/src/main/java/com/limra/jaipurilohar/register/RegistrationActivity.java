@@ -84,9 +84,6 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         ButterKnife.bind(this);
-
-        User usman = new User("Usman","Ghani", "usman123","usman@123","8742020289", "Badhal ke Agwan", "Gayatri Mandir Road", "Chaumahla", "Rajasthan","Business",
-                R.drawable.usman);
         loadGotra();
         loadStateCityDetails();
     }
@@ -166,7 +163,7 @@ public class RegistrationActivity extends AppCompatActivity {
         state = ((StateCityModel)stateSpinner.getSelectedItem()).getStateName();
         if(verifyDetails()){
             resetError();
-            User user = new User(firstName,lastName,userName,password,phone,selectedGotra,address,city, state,occupation,0);
+            User user = new User(firstName,lastName,userName,password,phone,selectedGotra,address,city, state,occupation,"");
             AppDataBase db = AppDataBase.getAppDatabase(this);
             db.userDao().insertIntoUserInfo(user);
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();

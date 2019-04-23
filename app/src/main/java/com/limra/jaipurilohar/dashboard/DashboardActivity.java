@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.TextView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.limra.jaipurilohar.LoharApplication;
@@ -27,13 +28,12 @@ import com.limra.jaipurilohar.contacts.ContactsAdapter;
 import com.limra.jaipurilohar.dao.AppDataBase;
 import com.limra.jaipurilohar.dao.User;
 import com.limra.jaipurilohar.gallery.GalleryActivity;
+import com.limra.jaipurilohar.gallery.ImagesAdapter;
 import com.limra.jaipurilohar.login.LoginActivity;
 import com.limra.jaipurilohar.search.SearchActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +50,12 @@ import com.limra.jaipurilohar.userDetail.UserDetailActivity;
 import com.limra.jaipurilohar.util.Constants;
 import com.squareup.picasso.Picasso;
 import me.relex.circleindicator.CircleIndicator;
+import net.time4j.SystemClock;
+import net.time4j.android.ApplicationStarter;
+import net.time4j.calendar.HijriCalendar;
+import net.time4j.engine.StartOfDay;
+import net.time4j.format.expert.ChronoFormatter;
+import net.time4j.format.expert.PatternType;
 
 import static com.limra.jaipurilohar.util.Constants.MY_PREFS_NAME;
 
@@ -68,6 +74,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     CircleIndicator indicator;
     @BindView(R.id.greetTextView)
     TextView greetTextView;
+    @BindView(R.id.newsViewPager)
+    ViewPager newsViewPager;
+    @BindView(R.id.dateTextView)
+    TextView dateTextView;
+
     private int currentPage = 0;
     private List<User> mContactsList;
 
@@ -166,9 +177,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         setSupportActionBar(toolbar);
 
         mResources.add(R.drawable.i);
-        mResources.add(R.drawable.dash_5);
+        mResources.add(R.drawable.ramzaan);
+        mResources.add(R.drawable.beti_bachao);
         mResources.add(R.drawable.dash_10);
-        mResources.add(R.drawable.dash_12);
         mResources.add(R.drawable.dash_13);
 
         String username = getSharedPreferences(Constants.MY_PREFS_NAME,MODE_PRIVATE).getString("username","");
@@ -188,7 +199,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        CustomPagerAdapter mCustomPagerAdapter = new CustomPagerAdapter(this, mResources);
+        CustomPagerAdapter mCustomPagerAdapter = new CustomPagerAdapter(this, mResources,150,200);
         mViewPager.setClipToPadding(false);
         mViewPager.setPadding(100, 0, 100, 0);
         mViewPager.setPageMargin(10);
@@ -220,10 +231,57 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }, DELAY_MS, PERIOD_MS);
 
         mContactsList = getContactsList();
-        achieversRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ContactsAdapter contactsAdapter = new ContactsAdapter(mContactsList, this);
+        AchieversAdapter contactsAdapter = new AchieversAdapter(mContactsList, this);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        achieversRecyclerView.setLayoutManager(layoutManager);
         achieversRecyclerView.setAdapter(contactsAdapter);
 
+        ApplicationStarter.initialize(this, true); // with prefetch on background thread
+
+        ChronoFormatter<HijriCalendar> hijriFormat =
+                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
+                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
+                        .addPattern(" MMMM yyyy", PatternType.CLDR)
+                        .build()
+                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
+        HijriCalendar today =
+                SystemClock.inLocalView().today().transform(
+                        HijriCalendar.class,
+                        HijriCalendar.VARIANT_UMALQURA
+                );
+        dateTextView.setText(hijriFormat.format(today));
+
+
+        ArrayList<Integer> drawableArrayList = new ArrayList<>();
+        drawableArrayList.add( R.drawable.dash_2);
+        drawableArrayList.add( R.drawable.dash_3);
+        drawableArrayList.add( R.drawable.dash_4);
+        drawableArrayList.add( R.drawable.news);
+
+        CustomPagerAdapter mNewsPagerAdapter = new CustomPagerAdapter(this, drawableArrayList,400,300);
+        newsViewPager.setAdapter(mNewsPagerAdapter);
+
+        newsViewPager.setPageTransformer(false, new DepthPageTransformation() );
+
+        int NUM__NEWS_PAGES = mNewsPagerAdapter.getCount();
+        final Handler newsHandler = new Handler();
+        final Runnable newsUpdate = new Runnable() {
+            public void run() {
+                if (currentPage == NUM__NEWS_PAGES) {
+                    currentPage = 0;
+                }
+                mViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        Timer newsTimer = new Timer(); // This will create a new Thread
+        newsTimer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                newsHandler.post(newsUpdate);
+            }
+        }, DELAY_MS, PERIOD_MS);
     }
 
     private List<User> getContactsList() {
@@ -236,10 +294,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         private ArrayList<Integer> images;
         private LayoutInflater inflater;
         private Context context;
+        private int height;
+        private  int width;
 
-        public CustomPagerAdapter(Context context, ArrayList<Integer> images) {
+        public CustomPagerAdapter(Context context, ArrayList<Integer> images, int height, int width) {
             this.context = context;
             this.images = images;
+            this.height = height;
+            this.width = width;
             inflater = LayoutInflater.from(context);
         }
 
@@ -258,7 +320,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             View myImageLayout = inflater.inflate(R.layout.pager_item, view, false);
             ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
             Bitmap result = Bitmap.createScaledBitmap(
-                    BitmapFactory.decodeResource(context.getResources(), images.get(position)), 200,150, false);
+                    BitmapFactory.decodeResource(context.getResources(), images.get(position)), width,height, false);
             myImage.setImageBitmap(result);
             view.addView(myImageLayout, 0);
             return myImageLayout;

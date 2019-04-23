@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_height="150dp"
+              android:layout_width="150dp">
+
+
+        <ImageView android:layout_width="30dp"
+                   android:layout_height="30dp"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="10dp"
+                   android:src="@drawable/ic_certificate"
+                   android:contentDescription="@string/achievers"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contactsImageView"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="20dp"
+            android:layout_width="60dp"
+            tools:src="@drawable/img_shadab"/>
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/nameTextView"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/contactsImageView"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/black"
+            tools:text="Shadab Ahamad"/>
+
+
+        <TextView
+            style="@style/labelStyleSmall"
+            android:id="@+id/achievementTextView"
+            android:gravity="center"
+            android:layout_below="@id/nameTextView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/light_blue"
+            tools:text="H1B Visa Processed"/>
+
+    <View
+        android:background="@color/offwhite"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_width="2dp"/>
+
+</RelativeLayout>

@@ -45,9 +45,9 @@ public class User implements Parcelable {
         private String occupation;
 
         @ColumnInfo(name = "image_url")
-        private int imageUrl;
+        private String imageUrl;
 
-    public User(String firstName, String lastName,String userName,String password, String phoneNumber, String gotra, String address, String city, String state, String occupation, int imageUrl) {
+    public User(String firstName, String lastName,String userName,String password, String phoneNumber, String gotra, String address, String city, String state, String occupation, String imageUrl) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -71,7 +71,7 @@ public class User implements Parcelable {
         city = in.readString();
         state = in.readString();
         occupation = in.readString();
-        imageUrl = in.readInt();
+        imageUrl = in.readString();
         userName = in.readString();
         password = in.readString();
     }
@@ -160,48 +160,48 @@ public class User implements Parcelable {
             this.occupation = occupation;
         }
 
-        public int getImageUrl() {
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getImageUrl() {
             return imageUrl;
         }
 
-    public String getUserName() {
-        return userName;
-    }
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+        @Override
+        public int describeContents() {
+            return 0;
+        }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setImageUrl(int imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(uid);
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeString(phoneNumber);
-        dest.writeString(gotra);
-        dest.writeString(address);
-        dest.writeString(city);
-        dest.writeString(state);
-        dest.writeString(occupation);
-        dest.writeInt(imageUrl);
-        dest.writeString(userName);
-        dest.writeString(password);
-    }
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(uid);
+            dest.writeString(firstName);
+            dest.writeString(lastName);
+            dest.writeString(phoneNumber);
+            dest.writeString(gotra);
+            dest.writeString(address);
+            dest.writeString(city);
+            dest.writeString(state);
+            dest.writeString(occupation);
+            dest.writeString(imageUrl);
+            dest.writeString(userName);
+            dest.writeString(password);
+        }
 }

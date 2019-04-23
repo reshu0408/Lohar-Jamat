@@ -2,6 +2,7 @@ package com.limra.jaipurilohar.userDetail;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -18,7 +19,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.limra.jaipurilohar.R;
 import com.limra.jaipurilohar.dao.User;
-import com.squareup.picasso.Picasso;
+import com.limra.jaipurilohar.util.Util;
 
 public class UserDetailActivity extends AppCompatActivity  implements AppBarLayout.OnOffsetChangedListener {
 
@@ -115,10 +116,7 @@ public class UserDetailActivity extends AppCompatActivity  implements AppBarLayo
     }
 
     private void loadUserData(){
-        if(mUser.getImageUrl() != 0)
-        imgHead.setImageDrawable(getResources().getDrawable(mUser.getImageUrl()));
-        else
-            imgHead.setImageDrawable(getResources().getDrawable(R.drawable.hammer));
+        imgHead.setImageDrawable(getResources().getDrawable(Util.getImageUrl(mUser.getImageUrl())));
         addressView.setText(mUser.getAddress() + ", " + mUser.getCity() + ", " + mUser.getState());
         businessTextView.setText(mUser.getOccupation());
         mTitle.setText(mUser.getFirstName() + " " + mUser.getLastName());

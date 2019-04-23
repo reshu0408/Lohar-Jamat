@@ -1,9 +1,12 @@
 package com.limra.jaipurilohar.contacts;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.ImageView;
 import com.limra.jaipurilohar.R;
 
 import java.util.ArrayList;
@@ -28,6 +31,9 @@ public class ContactsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
+    @BindView(R.id.no_data_imageView)
+    ImageView noDataImageView;
+
     private List<User> mContactsList;
     private SearchModel mSearchModel;
     @Override
@@ -51,9 +57,17 @@ public class ContactsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mContactsList = getContactsList();
-        contactsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ContactsAdapter contactsAdapter = new ContactsAdapter(mContactsList, this);
-        contactsRecyclerView.setAdapter(contactsAdapter);
+        if(mContactsList.size() == 0){
+            noDataImageView.setVisibility(View.VISIBLE);
+            contactsRecyclerView.setVisibility(View.GONE);
+        }else{
+            contactsRecyclerView.setVisibility(View.VISIBLE);
+            noDataImageView.setVisibility(View.GONE);
+            contactsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            ContactsAdapter contactsAdapter = new ContactsAdapter(mContactsList, this);
+            contactsRecyclerView.setAdapter(contactsAdapter);
+        }
+
     }
 
     private List<User> getContactsList() {

@@ -77,4 +77,6 @@
     <string name="enter_password">Enter password</string>
     <string name="enter_occupation">Enter Occupation</string>
     <string name="logout">Logout</string>
+    <string name="rajab">Rajab</string>
+    <string name="news">News</string>
 </resources>

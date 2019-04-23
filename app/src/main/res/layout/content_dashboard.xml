@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    tools:context=".dashboard.DashboardActivity"
-    tools:showIn="@layout/app_bar_dashboard">
+<ScrollView android:layout_width="match_parent"
+            android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools"
+            tools:context=".dashboard.DashboardActivity"
+            tools:showIn="@layout/app_bar_dashboard"
+            xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:weightSum="3"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1.3"
+                  android:id="@+id/dateTextView"
+                  android:gravity="start"
+                  android:textStyle="italic"
+                  android:text="@string/rajab"
+                  android:textColor="@color/colorAccent"
+                  android:padding="10dp"
+                  style="@style/labelStyleMedium"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="0dp"
                   android:id="@+id/greetTextView"
-                  android:gravity="center"
+                  android:gravity="right"
+                  android:layout_weight="1.7"
+                  android:layout_gravity="end"
                   android:textStyle="italic"
                   android:text="@string/assalam_alaikum"
                   android:textColor="@color/colorAccent"
                   android:padding="10dp"
                   style="@style/labelStyleMedium"
-                  android:textSize="25sp"
                   android:layout_height="wrap_content"/>
 
+    </LinearLayout>
     <LinearLayout
         android:background="@drawable/gradient"
         android:layout_height="30dp"
@@ -52,15 +72,40 @@
         android:padding="5dp"
         android:text="@string/achievers"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold|italic">
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/achieversRecyclerView"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:padding="10dp">
+        android:layout_width="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <TextView
+            android:background="@drawable/gradient"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/news"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold|italic">
+    </TextView>
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/newsViewPager"
+                android:layout_height="300dp"
+                android:layout_width="match_parent">
+        </androidx.viewpager.widget.ViewPager>
+
+        <LinearLayout
+                android:background="@drawable/gradient"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent">
+        </LinearLayout>
 </LinearLayout>
+</ScrollView>

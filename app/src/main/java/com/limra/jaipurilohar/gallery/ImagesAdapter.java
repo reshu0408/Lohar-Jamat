@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.limra.jaipurilohar.R;
+import com.limra.jaipurilohar.dashboard.DashboardActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -19,6 +20,10 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyViewHold
 
     ImageClickListener listener;
     private int[] drawableArray;
+
+    public ImagesAdapter(int[] drawableArray) {
+        this.drawableArray = drawableArray;
+    }
 
     interface ImageClickListener {
         void onClick(View view, int drawable);
