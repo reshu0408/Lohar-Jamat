@@ -15,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.limra.jaipurilohar.LoharApplication;
 import com.limra.jaipurilohar.R;
+import com.limra.jaipurilohar.SplashActivity;
 import com.limra.jaipurilohar.aboutUs.AboutUsActivity;
 import com.limra.jaipurilohar.contacts.ContactModel;
 import com.limra.jaipurilohar.contacts.ContactsAdapter;
@@ -45,6 +47,8 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.limra.jaipurilohar.userDetail.UserDetailActivity;
+import com.limra.jaipurilohar.util.Constants;
+import com.squareup.picasso.Picasso;
 import me.relex.circleindicator.CircleIndicator;
 
 import static com.limra.jaipurilohar.util.Constants.MY_PREFS_NAME;
@@ -62,8 +66,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     RecyclerView achieversRecyclerView;
     @BindView(R.id.indicator)
     CircleIndicator indicator;
+    @BindView(R.id.greetTextView)
+    TextView greetTextView;
     private int currentPage = 0;
-    private Timer timer;
     private List<User> mContactsList;
 
     @Override
@@ -88,25 +93,24 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String name = prefs.getString("username", "");//"No name defined" is the default value.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_user) {
-
-            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-            String name = prefs.getString("username", "");//"No name defined" is the default value.
-            if(!TextUtils.isEmpty(name)){
-                AppDataBase db = AppDataBase.getAppDatabase(this);
-                User currentUser = db.userDao().getUserByUserName(name);
-                if(currentUser != null){
-                    Intent intent = new Intent(this, UserDetailActivity.class);
-                    intent.putExtra("user", currentUser);
-                    startActivity(intent);
+        switch (id){
+            case R.id.action_user:
+                if(!TextUtils.isEmpty(name)){
+                    AppDataBase db = AppDataBase.getAppDatabase(this);
+                    User currentUser = db.userDao().getUserByUserName(name);
+                    if(currentUser != null){
+                        Intent intent = new Intent(this, UserDetailActivity.class);
+                        intent.putExtra("user", currentUser);
+                        startActivity(intent);
+                    }
                 }
-            }
-            return true;
-        }
+                return true;
 
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -140,6 +144,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 Intent SearchIntent = new Intent(this, SearchActivity.class);
                 startActivity(SearchIntent);
                 break;
+            case R.id.nav_logout:
+                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                prefs.edit().remove("username").apply();
+                Intent splashIntent = new Intent(this, SplashActivity.class);
+                startActivity(splashIntent);
+                finish();
+                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.clearFocus();
@@ -154,8 +165,19 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        for (int i = 0; i < 5; i++)
-            mResources.add(R.drawable.i);
+        mResources.add(R.drawable.i);
+        mResources.add(R.drawable.dash_5);
+        mResources.add(R.drawable.dash_10);
+        mResources.add(R.drawable.dash_12);
+        mResources.add(R.drawable.dash_13);
+
+        String username = getSharedPreferences(Constants.MY_PREFS_NAME,MODE_PRIVATE).getString("username","");
+        if(!TextUtils.isEmpty(username)){
+            User user = AppDataBase.getAppDatabase(this).userDao().getUserByUserName(username);
+            if(user != null){
+                greetTextView.setText(user.getFirstName() + " " + greetTextView.getText()  );
+            }
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -168,10 +190,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         CustomPagerAdapter mCustomPagerAdapter = new CustomPagerAdapter(this, mResources);
         mViewPager.setClipToPadding(false);
-        mViewPager.setPadding(200, 0, 200, 0);
-        mViewPager.setPageMargin(40);
+        mViewPager.setPadding(100, 0, 100, 0);
+        mViewPager.setPageMargin(10);
         mViewPager.setAdapter(mCustomPagerAdapter);
-        //mViewPager.setPageTransformer(true, new ZoomOutTransformation() );
+
+        mViewPager.setPageTransformer(false, new ZoomOutTransformation() );
 
         indicator.setViewPager(mViewPager);
         mCustomPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
@@ -181,7 +204,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == NUM_PAGES - 1) {
+                if (currentPage == NUM_PAGES) {
                     currentPage = 0;
                 }
                 mViewPager.setCurrentItem(currentPage++, true);
@@ -235,7 +258,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             View myImageLayout = inflater.inflate(R.layout.pager_item, view, false);
             ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
             Bitmap result = Bitmap.createScaledBitmap(
-                    BitmapFactory.decodeResource(context.getResources(), images.get(position)), 200, 200, false);
+                    BitmapFactory.decodeResource(context.getResources(), images.get(position)), 200,150, false);
             myImage.setImageBitmap(result);
             view.addView(myImageLayout, 0);
             return myImageLayout;

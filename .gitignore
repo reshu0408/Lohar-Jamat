@@ -6,3 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+*.ini
+*.apk
+app/release/output.json
+app/src/main/res/drawable/.picasa.ini

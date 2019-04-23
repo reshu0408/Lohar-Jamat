@@ -76,4 +76,5 @@
     <string name="enter_address">Enter addresss</string>
     <string name="enter_password">Enter password</string>
     <string name="enter_occupation">Enter Occupation</string>
+    <string name="logout">Logout</string>
 </resources>

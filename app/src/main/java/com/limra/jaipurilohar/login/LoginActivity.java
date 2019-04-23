@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     View mProgressView;
     @BindView(R.id.login_form)
     View mLoginFormView;
-    @BindView(R.id.forgot_password_text)
-    TextView forgotPasswordTextView;
     @BindView(R.id.sign_up_text)
     TextView signUpTextView;
     @BindView(R.id.sign_in_button)
@@ -60,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        forgotPasswordTextView.setPaintFlags(forgotPasswordTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         signUpTextView.setPaintFlags(signUpTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 

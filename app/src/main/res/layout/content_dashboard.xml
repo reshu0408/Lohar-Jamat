@@ -8,10 +8,20 @@
     tools:context=".dashboard.DashboardActivity"
     tools:showIn="@layout/app_bar_dashboard">
 
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/greetTextView"
+                  android:gravity="center"
+                  android:textStyle="italic"
+                  android:text="@string/assalam_alaikum"
+                  android:textColor="@color/colorAccent"
+                  android:padding="10dp"
+                  style="@style/labelStyleMedium"
+                  android:textSize="25sp"
+                  android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:background="@drawable/gradient"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent">
 
         <pl.droidsonroids.gif.GifTextView
