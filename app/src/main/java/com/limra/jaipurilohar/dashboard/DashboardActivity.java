@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -78,6 +79,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     ViewPager newsViewPager;
     @BindView(R.id.dateTextView)
     TextView dateTextView;
+    @BindView(R.id.newsIndicator)
+    CircleIndicator newsIndicator;
 
     private int currentPage = 0;
     private List<User> mContactsList;
@@ -261,27 +264,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         CustomPagerAdapter mNewsPagerAdapter = new CustomPagerAdapter(this, drawableArrayList,400,300);
         newsViewPager.setAdapter(mNewsPagerAdapter);
-
+        newsIndicator.setViewPager(newsViewPager);
+        mNewsPagerAdapter.registerDataSetObserver(newsIndicator.getDataSetObserver());
         newsViewPager.setPageTransformer(false, new DepthPageTransformation() );
-
-        int NUM__NEWS_PAGES = mNewsPagerAdapter.getCount();
-        final Handler newsHandler = new Handler();
-        final Runnable newsUpdate = new Runnable() {
-            public void run() {
-                if (currentPage == NUM__NEWS_PAGES) {
-                    currentPage = 0;
-                }
-                mViewPager.setCurrentItem(currentPage++, true);
-            }
-        };
-
-        Timer newsTimer = new Timer(); // This will create a new Thread
-        newsTimer.schedule(new TimerTask() { // task to be scheduled
-            @Override
-            public void run() {
-                newsHandler.post(newsUpdate);
-            }
-        }, DELAY_MS, PERIOD_MS);
     }
 
     private List<User> getContactsList() {
@@ -306,7 +291,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
         }
 
@@ -316,7 +301,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         @Override
-        public Object instantiateItem(ViewGroup view, int position) {
+        public Object instantiateItem(@NonNull ViewGroup view, int position) {
             View myImageLayout = inflater.inflate(R.layout.pager_item, view, false);
             ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
             Bitmap result = Bitmap.createScaledBitmap(
