@@ -50,6 +50,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="bottom|center"
+                        android:paddingTop="10dp"
                         android:id="@+id/title_expanded"
                         tools:text="SHADAB AHAMAD"
                         android:textColor="@android:color/white"
